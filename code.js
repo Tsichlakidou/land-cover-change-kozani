@@ -7,44 +7,13 @@ Map.addLayer(copy2000, {}, 'Kozani 2000');
 print(copy2000);
 
 
-// Εξαγωγή του συνδυασμένου χάρτη στο Google Drive
+// Export map in Google Drive
 Export.image.toDrive({
   image: copy2000.visualize(),
   description: 'corine2000',
   scale: 75,
   region: geometry
 });
-
-
-
-// Ορίστε τη θέση του τοπονυμίου
-//var location = ee.Geometry.Point(21.7924, 40.2961); // Παράδειγμα θέσης
-
-// // Δημιουργήστε το τοπωνύμιο
-// var label = ui.Label('Τοπωνύμιο εδώ', {
-//   position: 'top-center', // Τοποθεσία του τοπωνυμίου στον χάρτη
-//   backgroundColor: 'FFFFFF', // Χρώμα του φόντου
-//   padding: '8px', // Περιθώριο
-//   fontSize: '16px' // Μέγεθος γραμματοσειράς
-// });
-
-// // Προσθέστε το τοπωνύμιο στον χάρτη
-// Map.add(label);
-
-//-----------------------------------------------------------------------
-// Δημιουργία εικόνας με λευκό φόντο
-//var whiteBackground = ee.Image(255).toInt8().paint(geometry, 0);
-
-// Συνδυασμός της πολυγωνικής εικόνας με το λευκό φόντο
-//var finalImage = copy2000.add(whiteBackground);
-
-// Export.image.toDrive({
-//   image: copy2000.visualize(), // Χρησιμοποιήστε .visualize() για να εξάγετε την οπτική αναπαράσταση της εικόνας
-//   description: 'fin2000',
-//   //scale: 30,
-//   region: geometry2
-// });
-
 
 
 var dataset2 = ee.Image('COPERNICUS/CORINE/V20/100m/2018');
@@ -100,7 +69,7 @@ Export.image.toDrive({
   min: 0,
   max: 8,
   palette: [ '#83ff00','#ff0000', '#1968ff', '#9effe5', '#dda232','#7e828e','#175c0f','#1a8d0d','#68ba11'],
-}), // Χρησιμοποιήστε .visualize() για να εξάγετε την οπτική αναπαράσταση της εικόνας
+}), 
   description: 'Kozani2000_classified',
   scale: 75,
   region: geometry
@@ -134,7 +103,7 @@ Export.image.toDrive({
   min: 0,
   max: 8,
   palette: [ '#83ff00','#ff0000', '#1968ff', '#9effe5', '#dda232','#7e828e','#175c0f','#1a8d0d','#68ba11'],
-}), // Χρησιμοποιήστε .visualize() για να εξάγετε την οπτική αναπαράσταση της εικόνας
+}), 
   description: 'Kozani2018_classified',
   scale: 75,
   region: geometry
@@ -144,7 +113,7 @@ Export.image.toDrive({
 
 
 //-----------------------------------------------
-//ΠΙΞΕΛ ΚΑΘΕ ΚΑΤΗΓΟΡΙΑΣ ΓΙΑ ΤΗΝ ΑΡΧΙΚΗ ΕΙΚΟΝΑ 2000
+//pixel of each categorie 2000
 var histogram_2000 = copy2000.reduceRegion({
   reducer: ee.Reducer.frequencyHistogram(),
   geometry: geometry2,
@@ -154,7 +123,7 @@ var histogram_2000 = copy2000.reduceRegion({
 var histogramData_2000 = ee.Dictionary(histogram_2000.get('landcover'));
 print("2000",histogram_2000);
 
-// Εκτυπώνουμε τα ονόματα των διαθέσιμων επιπέδων
+// print
 var bandNames = classified_2000.bandNames();
 print('Ονόματα επιπέδων:', bandNames);
 
@@ -166,7 +135,7 @@ var pixelCount = classified_2000.reduceRegion({
 });
 
 print('Συνολικός αριθμός πίξελ:', pixelCount.get('classification'));
-//ΠΙΞΕΛ ΚΑΘΕ ΚΑΤΗΓΟΡΙΑΣ
+
 var h2000 = classified_2000.reduceRegion({
   reducer: ee.Reducer.frequencyHistogram(),
   geometry: geometry2,
@@ -174,10 +143,10 @@ var h2000 = classified_2000.reduceRegion({
   maxPixels: 1e9
 });
 
-// Ανάκτηση των δεδομένων του ιστογράμματος
+// histogramm
 var histogramData = ee.Dictionary(h2000.get('classification'));
 
-// Εμφάνιση του ιστογράμματος
+// print
 print("Ιστόγραμμα 2000:", histogramData);
 //------------------------------------------------
 var histogram_2018 = copy2018.reduceRegion({
@@ -188,7 +157,7 @@ var histogram_2018 = copy2018.reduceRegion({
 });
 var histogramData_2018 = ee.Dictionary(histogram_2018.get('classification'));
 print("2018",histogram_2018);
-// Εκτυπώνουμε τα ονόματα των διαθέσιμων επιπέδων
+// print
 var bandNames = classified_2018.bandNames();
 print('Ονόματα επιπέδων:', bandNames);
 
@@ -208,31 +177,27 @@ var h2000 = classified_2018.reduceRegion({
   maxPixels: 1e9
 });
 
-// Ανάκτηση των δεδομένων του ιστογράμματος
+// histogramm
 var histogramData = ee.Dictionary(h2000.get('classification'));
 
-// Εμφάνιση του ιστογράμματος
+// print
 print("Κατηγορίες 2018:", histogramData);
 //--------------------------------------------
 
 
-// Βρίσκουμε τον τύπο των pixel του ιστογράμματος
-// var dataType_histogram_2018 = histogram_2018.get('landcover').getInfo().type;
 
-// print('Ο τύπος δεδομένων των τιμών του ιστογράμματος για το έτος 2018 είναι: ' + dataType_histogram_2018);
 
-// Χρησιμοποιήστε τον μειωτή countDistinct για να μετρήσετε τον αριθμό των μοναδικών τιμών (χρωμάτων)
 var count = copy2000.reduceRegion({
   reducer: ee.Reducer.countDistinct(),
   geometry: geometry2,
-  scale: 100, // Εδώ μπορείτε να ορίσετε την κατάλληλη κλίμακα ανάλυσης
-  maxPixels: 1e9 // Εδώ μπορείτε να ορίσετε τον μέγιστο αριθμό των pixels που θέλετε να εξεταστούν
+  scale: 100, 
+  maxPixels: 1e9 // max of pixels
 });
 
-// Εκτυπώστε τον αριθμό των μοναδικών τιμών (χρωμάτων)
+
 print('Αριθμός μοναδικών χρωμάτων: ', count.get('landcover'));
 
-// Ορίστε την περιοχή ενδιαφέροντος ως το περίγραμμα της εικόνας copy2000
+// region of interest
 var roi = copy2018.geometry().bounds();
 
 
@@ -251,7 +216,7 @@ Export.image.toDrive({
   min: 0,
   max: 1,
   palette: ['FFFFFF', 'FF0000'],
-}), // Χρησιμοποιήστε .visualize() για να εξάγετε την οπτική αναπαράσταση της εικόνας
+}), 
   description: 'διαφορεσ',
   scale: 75,
   region: geometry2
@@ -262,10 +227,10 @@ var hd = differences.reduceRegion({
   scale: differences.projection().nominalScale(),
   maxPixels: 1e9
 });
-// Ανάκτηση των δεδομένων του ιστογράμματος
+
 var histogram = ee.Dictionary(hd.get('classification'));
 
-// Εμφάνιση του ιστογράμματος
+
 print("allages:", histogram);
 //---------------------------------------------------------
 //category 1-urban
@@ -293,26 +258,24 @@ var bothMasksValue = mask1.and(mask2);
 var combinedImage = differences.add(bothMasksValue.multiply(2));
 
 Map.addLayer(combinedImage, visParams, 'Urban');
-//-->gkri=>idia 2
-//-->kokkino=>ekseliksi-1
-//-->maura=>auta pou eksafanistikan 1
+
 var hAgro = combinedImage.reduceRegion({
   reducer: ee.Reducer.frequencyHistogram(),
   geometry: geometry2,
   scale: combinedImage.projection().nominalScale(),
   maxPixels: 1e9
 });
-// Ανάκτηση των δεδομένων του ιστογράμματος
+
 var histogramData = ee.Dictionary(hAgro.get('classification'));
 
-// Εμφάνιση του ιστογράμματος
+
 print("Κατηγορίες Urban:", histogramData);
 Export.image.toDrive({
   image: combinedImage.visualize({
   min: -1,
   max: 2,
   palette: ['#ff0000','#fff5c2', '#000000', '#978787'],
-}), // Χρησιμοποιήστε .visualize() για να εξάγετε την οπτική αναπαράσταση της εικόνας
+}), 
   description: 'urban',
   scale: 75,
   region: geometry6
@@ -343,7 +306,7 @@ Export.image.toDrive({
   min: -1,
   max: 2,
   palette: ['#ff0000','#fff5c2', '#000000', '#978787'],
-}), // Χρησιμοποιήστε .visualize() για να εξάγετε την οπτική αναπαράσταση της εικόνας
+}), 
   description: 'cat-0',
   scale: 75,
   region: geometry2
@@ -354,10 +317,10 @@ var hveg = combinedImage1.reduceRegion({
   scale: combinedImage1.projection().nominalScale(),
   maxPixels: 1e9
 });
-// Ανάκτηση των δεδομένων του ιστογράμματος
+
 var histogramData1 = ee.Dictionary(hveg.get('classification'));
 
-// Εμφάνιση του ιστογράμματος
+
 print("Κατηγορίες veg:", histogramData1);
 //---------------------------------------------------------
 //category 2-water
@@ -385,10 +348,10 @@ var hwater = combinedImage2.reduceRegion({
   scale: combinedImage2.projection().nominalScale(),
   maxPixels: 1e9
 });
-// Ανάκτηση των δεδομένων του ιστογράμματος
+
 var histogramData2 = ee.Dictionary(hwater.get('classification'));
 
-// Εμφάνιση του ιστογράμματος
+
 print("Κατηγορίες water:", histogramData2);
 
 
@@ -397,7 +360,7 @@ Export.image.toDrive({
   min: -1,
   max: 2,
   palette: ['#ff0000','#fff5c2', '#000000', '#978787'],
-}), // Χρησιμοποιήστε .visualize() για να εξάγετε την οπτική αναπαράσταση της εικόνας
+}), 
   description: 'cat-2',
   scale: 75,
   region: geometry5
@@ -645,182 +608,8 @@ var hveg313 = combinedImage8.reduceRegion({
   scale: combinedImage8.projection().nominalScale(),
   maxPixels: 1e9
 });
-// Ανάκτηση των δεδομένων του ιστογράμματος
+// histogramm
 var histogramData8 = ee.Dictionary(hveg313.get('classification'));
 
-// Εμφάνιση του ιστογράμματος
+// print
 print("Κατηγορίες veg313:", histogramData8);
-
-
-var images = [copy2000, copy2018]; // Εδώ προσθέστε τις εικόνες που θέλετε να χρησιμοποιήσετε.
-
-// Ενώστε τις εικόνες σαν bands.
-var stacked = ee.ImageCollection.fromImages(images).toBands();
-
-// Οπτικοποιήστε το Image Collection ως GIF.
-var gif = stacked.visualize(1, { format: 'GIF', size: 500 });
-
-// Εξαγάγετε το GIF στο Google Drive.
-Export.video.toDrive({
-  collection: ee.ImageCollection([gif]),
-  description: 'my_gif',
-  dimensions: 500,
-  framesPerSecond: 4
-});
-
-
-print(ui.Thumbnail({image: gif}));
-
-
-
-//Define GIF visualization arguments.
-var gifParams = {
-  'region': geometry2,
-  'dimensions': 800,
-  'framesPerSecond': 2,
-  'format': 'gif'
-};
-
-//Labeling your images.
-var annotations = [{
-  position: 'bottom',
-  offset: '10%',
-  margin: '20%',
-  property: 'year',
-  scale: 6000
-  }];
-  
-
-
-
-
-
-
-
-// // Δημιουργήστε μια εικόνα με λευκό φόντο
-// var whiteBackground = ee.Image(255).toInt8().paint(geometry2, 0);
-
-// // Συνδυάστε την πολυγωνική εικόνα με το λευκό φόντο
-// var finalImage = classified_2000.visualize({
-//   min: 0,
-//   max: 8,
-//   palette: ['#83ff00', '#ff0000', '#1968ff', '#9effe5', '#dda232', '#7e828e', '#1b6c12', '#239316', '#3ccc34']
-// }).blend(whiteBackground);
-
-// // Εξαγωγή της τελικής εικόνας στο Google Drive
-// Export.image.toDrive({
-//   image: finalImage,
-//   description: 'classified_with_white_background',
-//   scale: 30,
-//   region: geometry2
-// });
-
-
-
-
-
-// // // Επιλογή της εικόνας προς εξαγωγή (combinedImage)
-// // var imageToExport = combinedImage;
-
-// // // Καθορισμός των παραμέτρων για την εξαγωγή
-// // var exportParams = {
-// //   image: imageToExport,
-// //   description: 'combined_image_export', // Περιγραφή του αρχείου που θα δημιουργηθεί
-// //   folder: 'your_folder_name', // Όνομα του φακέλου στο Google Drive
-// //   scale: 100, // Ανάλυση
-// //   region: geometry2, // Περιοχή εξαγωγής (Geometry ή Feature)
-// //   maxPixels: 1e9 // Μέγιστος αριθμός πίξελ που επιτρέπεται
-// // };
-
-// // // Επιλογή της εικόνας προς εξαγωγή (combinedImage)
-// // var imageToExport = combinedImage;
-
-// // // Καθορισμός των παραμέτρων για την εξαγωγή
-// // var exportParams = {
-// //   image: imageToExport,
-// //   description: 'combined_image_export', // Περιγραφή του αρχείου που θα δημιουργηθεί
-// //   folder: 'your_folder_name', // Όνομα του φακέλου στο Google Drive
-// //   scale: 100, // Ανάλυση
-// //   region: geometry, // Περιοχή εξαγωγής (Geometry ή Feature)
-// //   maxPixels: 1e9 // Μέγιστος αριθμός πίξελ που επιτρέπεται
-// // };
-
-// // // Εκκίνηση της διαδικασίας εξαγωγής
-// // Export.image.toDrive(exportParams);
-
-// // Περιμένουμε μέχρι να ολοκληρωθεί η διαδικασία εξαγωγής
-// print('Exporting image...');
-
-// // Πάρτε το URL για να κατεβάσετε τη συνδυασμένη εικόνα
-// var downloadUrl = combinedImage.getDownloadURL({
-//   name: 'combined_image', // Όνομα του αρχείου που θα κατεβάσετε
-//   scale: 100, // Ανάλυση
-//   region: geometry2 // Περιοχή εξαγωγής (Geometry ή Feature)
-// });
-
-// // Εμφάνιση του URL στην κονσόλα για χρήση
-// print('Download URL:', downloadUrl);
-// Εκκίνηση της διαδικασίας εξαγωγής
-//Export.image.toDrive(exportParams);
-
-
-// Add the blended image to the map
-//Map.addLayer(blendedVis, {}, 'Blended Image');
-
-
-//Map.addLayer(combinedImage, visParams, 'Συνδυασμένη Εικόνα');
-
-//mauro->ekseliksi
-//aspro->to antitheto
-
-// Add the mask showing non-urban to urban change (category 1)
-//Map.addLayer(nonUrbanToUrban.updateMask(nonUrbanToUrban).add(mask1), {}, 'hhhhhhhh');
-
-// var mask1 = classified_2018.eq(1);
-// var mask2 = classified_2000.eq(1);
-
-// var nonUrbanToUrban = mask2.subtract(mask1);
-// var unchangedUrban = mask1.and(mask2);
-
-// // Add the mask showing urban to non-urban change (category 1)
-// Map.addLayer(mask1.updateMask(mask1), {palette: 'FF0000'}, 'Urban (2018)');
-
-// // Add the mask showing non-urban to urban change (category 1)
-// Map.addLayer(nonUrbanToUrban.updateMask(nonUrbanToUrban), {palette: 'red'}, 'Non-Urban to Urban');
-
-// // Add the unchanged urban pixels (category 1)
-// Map.addLayer(unchangedUrban.updateMask(unchangedUrban), {palette: 'green'}, 'Unchanged Urban');
-
-
-// // Create a combined mask that shows unchanged urban pixels in green
-// var combinedMask = unchangedUrban.multiply(2).add(nonUrbanToUrban).add(mask1);
-
-// var visParamsCombined = {
-//   min: 0,
-//   max: 4,
-//   palette: ['green', 'blue', 'red','white'] // Green for unchanged urban, blue for non-urban to urban, red for urban 2018
-// };
-
-// Map.addLayer(combinedMask, visParamsCombined, 'Combined Mask');
-
-//Map.addLayer(.updateMask(nonUrbanToUrban.not()).updateMask().updateMask(mask1), unchangedUrbanVisParams, 'Unchanged Urban Areas');
-// var mask3 = classified_2018.eq(0);
-// //Map.addLayer(mask1, {}, 'urban-n');
-// var mask4 = classified_2000.eq(0);
-
-// var nonVegToVeg = mask4.subtract(mask3);
-// Map.addLayer(nonVegToVeg, {}, 'Non-Veg to Veg');
-// //mauro->ekseliksi
-// //aspro->to antitheto
-// var mask5 = classified_2018.eq(2);
-// var mask6 = classified_2000.eq(2);
-
-// var nonWaterToWater = mask6.subtract(mask5);
-// Map.addLayer(nonWaterToWater, {}, 'NonWaterToWater');
-
-// var mask7 = classified_2018.eq(3);
-// var mask8 = classified_2000.eq(3);
-
-// var nonRoadToRoad = mask8.subtract(mask7);
-// Map.addLayer(nonRoadToRoad, {}, 'NonRoadToRoad');
-
