@@ -37,6 +37,24 @@ CLC classes were grouped into 9 main land cover categories and thematic maps wer
 
 ---
 
+## Quantitative Results
+
+| Land cover type | Change |
+| ---| ---|
+| Urban | +0.4% |
+| Agriculture | -2.1% |
+| Forest | -1.0% |
+| Water | +0.1% |
+| Mineral extraction sites| +0.2% |
+| Mixed Forest | +1.1% |
+| Broadleaf Forest | +1.1% |
+| Coniferous Forest | +0.1% |
+| Road Network | +0.1% |
+
+*Values derived from CLC comparison (2000–2018).*
+
+---
+
 ## How to run
 This script is designed for the **Google Earth Engine Code Editor**.
 
@@ -60,5 +78,6 @@ These must exist in your GEE Assets.
 ## Author
 Paraskevi Tsichlakidou  
 Electrical & Computer Engineering (BSc + Integrated MSc)
+
 
 
