@@ -1,3 +1,5 @@
+📄 Full thesis: [Download PDF](./Thesis_Land_Cover_Change_Kozani.pdf)
+
 # Land Cover Change Analysis in Kozani (2000–2018)
 
 Satellite-based land cover classification and change detection for the Kozani region (Greece), using **Google Earth Engine (JavaScript)** and map finalization in **QGIS**.
@@ -58,3 +60,4 @@ These must exist in your GEE Assets.
 ## Author
 Paraskevi Tsichlakidou  
 Electrical & Computer Engineering (BSc + Integrated MSc)
+
