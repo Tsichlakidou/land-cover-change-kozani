@@ -28,8 +28,11 @@ A thesis project using **Google Earth Engine (JavaScript)** and **QGIS** to anal
   <figcaption><em>Corine Land Cover 2018</em></figcaption>
 </figure>
 <figure style="text-align:center;">
-  <img src="img/corine_2018.png" width="700">
+  <img src="img/Kozani2018_classified.png" width="700">
   <figcaption><em>Reclassification 2018</em></figcaption>
 </figure>
-![Map 2018 Reclassified](img/Kozani2018_classified.png)
-![Change map- agroculture change](img/agro.png)
+<figure style="text-align:center;">
+  <img src="img/agro.png" width="700">
+  <figcaption><em>Agrocultural Change Detection</em></figcaption>
+</figure>
+
