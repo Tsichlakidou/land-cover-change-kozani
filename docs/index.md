@@ -39,6 +39,6 @@ A thesis project using **Google Earth Engine (JavaScript)** and **QGIS** to anal
 </figure>
 
 <figure style="text-align:center;">
-  <img src="img/overall_changes" width="700">
+  <img src="img/overall_changes.png" width="700">
   <figcaption><em>Change Detection </em></figcaption>
 </figure>
