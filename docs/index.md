@@ -33,6 +33,6 @@ A thesis project using **Google Earth Engine (JavaScript)** and **QGIS** to anal
 </figure>
 <figure style="text-align:center;">
   <img src="img/agro.png" width="700">
-  <figcaption><em>Agrocultural Change Detection</em></figcaption>
+  <figcaption><em>Agricultural Change Detection</em></figcaption>
 </figure>
 
