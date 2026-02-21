@@ -1,6 +1,4 @@
----
-title: Land Cover Change – Kozani (2000–2018)
----
+
 
 # Land Cover Change Analysis in Kozani (2000–2018)
 
