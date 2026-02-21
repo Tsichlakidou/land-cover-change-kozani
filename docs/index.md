@@ -29,13 +29,13 @@ A thesis project using **Google Earth Engine (JavaScript)** and **QGIS** to anal
 <figure style="text-align:center;">
   <img src="img/Kozani2018_classified.png" width="700">
   <figcaption><em>Reclassification 2018</em></figcaption>
-</figure><br>
+</figure><br><br><br>
 
 <figure style="text-align:center;">
   <img src="img/agro.png" width="700">
   <figcaption><em>Agricultural Change Detection</em></figcaption>
 </figure><br>
-
+<br><br>
 <figure style="text-align:center;">
   <img src="img/overall_changes.png" width="700">
   <figcaption><em>Change Detection </em></figcaption>
