@@ -22,6 +22,6 @@ A thesis project using **Google Earth Engine (JavaScript)** and **QGIS** to anal
 - Forest classes changed (broad-leaved / coniferous / mixed)
 
 ## Figures
-![Map 2018 Corine](img/corine_2018.tif)
-![Map 2018 Reclassified](img/Kozani2018_classified.tif)
-![Change map- agroculture change](img/agro.tif)
+![Map 2018 Corine](img/corine_2018.png)
+![Map 2018 Reclassified](img/Kozani2018_classified.png)
+![Change map- agroculture change](img/agro.png)
