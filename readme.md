@@ -1,4 +1,4 @@
-📄 Full thesis: [Download PDF](./Thesis_Land_Cover_Change_Kozani.pdf)
+📄 Full thesis: [Download PDF](./Thesis-Land-Cover-Change-Kozani.pdf)
 
 # Land Cover Change Analysis in Kozani (2000–2018)
 
@@ -60,4 +60,5 @@ These must exist in your GEE Assets.
 ## Author
 Paraskevi Tsichlakidou  
 Electrical & Computer Engineering (BSc + Integrated MSc)
+
 
